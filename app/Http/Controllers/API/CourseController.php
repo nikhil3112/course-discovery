@@ -9,9 +9,94 @@ use App\Models\Course;
 class CourseController extends Controller
 {
     // Retrieve all courses
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Course::all(), 200);
+        $query = Course::query();
+
+        // Filter by Category
+        if ($request->has('category')) {
+            $query->where('category', $request->input('category'));
+        }
+
+        // Filter by Price (Free or Paid)
+        if ($request->has('price')) {
+            if ($request->input('price') === 'Free') {
+                $query->where('price', 0);
+            } elseif ($request->input('price') === 'Paid') {
+                $query->where('price', '>', 0);
+            } elseif ($request->has('price_range')) {
+                $range = explode('-', $request->input('price_range'));
+                $query->whereBetween('price', [(float)$range[0], (float)$range[1]]);
+            }
+        }
+
+        // Filter by Difficulty Level
+        if ($request->has('difficulty')) {
+            $query->where('difficulty', $request->input('difficulty'));
+        }
+
+        // Filter by Duration
+        if ($request->has('duration')) {
+            switch ($request->input('duration')) {
+                case '< 2 hours':
+                    $query->where('duration', '<', 2);
+                    break;
+                case '2–5 hours':
+                    $query->whereBetween('duration', [2, 5]);
+                    break;
+                case '5–10 hours':
+                    $query->whereBetween('duration', [5, 10]);
+                    break;
+                case '> 10 hours':
+                    $query->where('duration', '>', 10);
+                    break;
+            }
+        }
+
+        // Filter by Ratings
+        if ($request->has('ratings')) {
+            switch ($request->input('ratings')) {
+                case '4+ stars':
+                    $query->where('rating', '>=', 4);
+                    break;
+                case '3+ stars':
+                    $query->where('rating', '>=', 3);
+                    break;
+                case '2 stars and below':
+                    $query->where('rating', '<=', 2);
+                    break;
+            }
+        }
+
+        // Filter by Course Format
+        if ($request->has('format')) {
+            $query->where('format', $request->input('format'));
+        }
+
+        // Filter by Certification
+        if ($request->has('certification')) {
+            $query->where('certification', $request->input('certification'));
+        }
+
+        // Filter by Release Date
+        if ($request->has('release_date')) {
+            $date = now();
+            switch ($request->input('release_date')) {
+                case 'Last 30 days':
+                    $query->where('release_date', '>=', $date->subDays(30));
+                    break;
+                case 'Last 6 months':
+                    $query->where('release_date', '>=', $date->subMonths(6));
+                    break;
+                case 'Last 1 year':
+                    $query->where('release_date', '>=', $date->subYear());
+                    break;
+            }
+        }
+
+        $courses = $query->get();
+
+        return response()->json($courses);
     }
 
     // Retrieve a specific course by ID

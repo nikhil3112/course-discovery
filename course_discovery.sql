@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 28, 2025 at 03:34 PM
+-- Generation Time: Jan 28, 2025 at 05:57 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.13
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `courses`
@@ -53,8 +53,9 @@ CREATE TABLE IF NOT EXISTS `courses` (
 
 INSERT INTO `courses` (`id`, `title`, `description`, `price`, `instructor`, `category`, `difficulty`, `duration`, `rating`, `format`, `certification`, `release_date`, `popularity`, `created_at`, `updated_at`) VALUES
 (1, 'Learn Laravel Course', 'This is an updated description for the Laravel course.', '119.99', 'Jane Doe', 'Web Development', 'Advanced', 15, 4, 'Video', 1, '2025-01-24 18:30:00', 120, '2025-01-27 11:45:06', '2025-01-27 11:52:18'),
-(2, 'Learn React JS', 'A comprehensive guide to React JS.', '59.99', 'John Cena', 'Programming', 'Beginner', 10, 5, 'Video', 1, '2025-01-14 18:30:00', 100, '2025-01-27 11:47:48', '2025-01-27 11:47:48'),
-(3, 'Learn Angular JS', 'A comprehensive guide to Angular JS.', '199.99', 'John Cena', 'Programming', 'Advanced', 10, 5, 'Video', 1, '2025-01-14 18:30:00', 100, '2025-01-27 11:47:56', '2025-01-27 11:47:56');
+(2, 'Learn React JS', 'A comprehensive guide to React JS.', '59.99', 'John Cena', 'Programming', 'Beginner', 10, 5, 'Text-based', 1, '2025-01-14 18:30:00', 100, '2025-01-27 11:47:48', '2025-01-27 11:47:48'),
+(3, 'Learn Angular JS', 'A comprehensive guide to Angular JS.', '199.99', 'John Cena', 'Programming', 'Advanced', 10, 5, 'Video', 1, '2025-01-14 18:30:00', 100, '2025-01-27 11:47:56', '2025-01-27 11:47:56'),
+(4, 'Learn Node JS', 'A comprehensive guide to Node JS.', '0.00', 'John Cena', 'Programming', 'Beginner', 10, 5, 'Video', 0, '2025-01-14 18:30:00', 100, '2025-01-27 11:47:56', '2025-01-27 11:47:56');
 
 -- --------------------------------------------------------
 

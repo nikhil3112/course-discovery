@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/courses', [CourseController::class, 'index']);
+Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
